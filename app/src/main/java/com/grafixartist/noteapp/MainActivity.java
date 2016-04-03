@@ -57,16 +57,15 @@ public class MainActivity extends AppCompatActivity {
             modifyPos = savedInstanceState.getInt("modify");
 
 
-        if (initialCount > 0) {
+        if (initialCount >= 0) {
 
             notes = Note.listAll(Note.class);
 
             adapter = new NotesAdapter(MainActivity.this, notes);
             recyclerView.setAdapter(adapter);
 
-
-        } else {
-            Snackbar.make(recyclerView, "No notes added.", Snackbar.LENGTH_SHORT).show();
+            if (notes.isEmpty())
+                Snackbar.make(recyclerView, "No notes added.", Snackbar.LENGTH_LONG).show();
 
         }
 
